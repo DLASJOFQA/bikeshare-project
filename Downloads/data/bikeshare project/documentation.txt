@@ -1,0 +1,9 @@
+About the project
+The project displays data for three cities from the cities of
+the United States of America: Chicago , New york city , Washington
+Data regarding bikeshare 
+Of course, the program interacts with the user very accurately through which it can filter the data by state, month, or day, or according to other options
+
+In the end, these are the helpful resources in the code journey
+1- book : python for data analysis
+2-website : https//stackoverflow.com
