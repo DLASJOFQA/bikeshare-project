@@ -2,9 +2,9 @@ import time
 import pandas as pd
 import numpy as np
 
-CITY_DATA = { 'Chicago': 'chicago.csv',
-              'New York City': 'new_york_city.csv',
-              'Washington': 'washington.csv' }
+CITY_DATA = { 'chicago': 'chicago.csv',
+              'new york city': 'new_york_city.csv',
+              'washington': 'washington.csv' }
 
 def get_filters():
     """
@@ -16,32 +16,32 @@ def get_filters():
     """
 
     print('\nHello! Let\'s explore some US bikeshare data!')
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+   
 
 
     while True:
-      city = input("\nWhich city would you like to filter by?\n New York City \n Chicago \n Washington?\n")
-      if city not in ('New York City', 'Chicago', 'Washington'):
+      city = input("\nWhich city would you like to filter by?\n new york city \n chicago \n washington?\n").lower()
+      if city not in ['new york city', 'chicago', 'washington']:
         print("Sorry, I didn't catch that. Try again.")
         continue
       else:
         break
 
-    # TO DO: get user input for month (all, january, february, ... , june)
+   
 
     while True:
-      month = input("\n Which month would you like to filter by? January, February, March, April..... 'all' if you do not have any preference?\n")
-      if month not in ('January', 'February', 'March', 'April', 'May', 'June', 'all'):
+      month = input("\n Which month would you like to filter by? January, February, March, April..... 'all' if you do not have any preference?\n").lower()
+      if month not in ['january', 'february', 'march', 'april', 'may', 'june', 'all']:
         print("Sorry, I didn't catch that. Try again.")
         continue
       else:
         break
 
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
+   
 
     while True:
-      day = input("\nAre you looking for a particular day? If so, kindly enter the day as follows: Sunday, Monday, Tuesday, Wednesday..... 'all' if you do not have any preference.\n")
-      if day not in ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'all'):
+      day = input("\nAre you looking for a particular day? If so, kindly enter the day as follows: Sunday, Monday, Tuesday, Wednesday..... 'all' if you do not have any preference.\n").lower()
+      if day not in ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'all']:
         print("Sorry, I didn't catch that. Try again.")
         continue
       else:
@@ -50,7 +50,10 @@ def get_filters():
     print('-'*40)
     return city, month, day
 
-################################################################################################################################
+
+
+
+
 def load_data(city, month, day):
 
     """
@@ -76,7 +79,7 @@ def load_data(city, month, day):
     # filter by month if applicable
     if month != 'all':
     # use the index of the months list to get the corresponding int
-        months = ['January', 'February', 'March', 'April', 'May', 'June']
+        months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
 
     # filter by month to create the new dataframe
@@ -89,7 +92,7 @@ def load_data(city, month, day):
 
     return df
 
-################################################################################################################################
+
 def time_stats(df):
     
     """Displays statistics on the most frequent times of travel."""
@@ -120,7 +123,7 @@ def time_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-################################################################################################################################
+
 def station_stats(df):
     
     """Displays statistics on the most popular stations and trip."""
@@ -143,7 +146,7 @@ def station_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-################################################################################################################################
+
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
@@ -165,7 +168,7 @@ def trip_duration_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-################################################################################################################################
+
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
@@ -209,8 +212,8 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-################################################################################################################################
-def display_raw_data(df):
+
+#def display_raw_data(df):
     
     """Displays raw data on user request.
     Args:
@@ -224,7 +227,30 @@ def display_raw_data(df):
             return
         next = next + 5
         print(df.iloc[next:next+5])
-################################################################################################################################
+
+        
+def display_data(df):
+    """
+    Display contents of the CSV file to the display as requested by
+    the user.
+    """
+
+    start_loc = 0
+    end_loc = 5
+
+    display_active = input("Do you want to see the raw data?: ").lower()
+
+    if display_active == 'yes':
+        while end_loc <= df.shape[0] - 1:
+          
+            print(df.iloc[start_loc:end_loc,:])
+            start_loc += 5
+            end_loc += 5
+
+            end_display = input("Do you wish to continue?: ").lower()
+            if end_display == 'no':
+                break
+
 def main():
     while True:
         city, month, day = get_filters()
